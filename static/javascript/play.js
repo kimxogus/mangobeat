@@ -104,8 +104,8 @@ google.setOnLoadCallback(_run);
 
 function findData(text){
   jQuery.ajax({
-        type:"POST",
-        url:"/music/",
+        type:"GET",
+        url:"/music",
         //dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         timeout:10000,
@@ -113,9 +113,6 @@ function findData(text){
         success : function(data) {
               // 통신이 성공적으로 이루어졌을 때 이 함수를 타게 된다.
               // TODO
-              data_s = data.replace (/\\x/g, "\%");
-              data_s = unescape(data_s);
-              data = jQuery.parseJSON(data_s);
 
               //print list
               function showResult(name, id){
@@ -153,10 +150,10 @@ function findData(text){
                 $(addBox).append(musicAdd);
                 
               }
-              console.log(data.hasOwnProperty);
+
               for (var i = Object.keys(data).length - 1; i >= 0; i--) {
                 showResult(data[i].name, data[i].id);
-              };
+              }
 
         },
         complete : function(data) {
